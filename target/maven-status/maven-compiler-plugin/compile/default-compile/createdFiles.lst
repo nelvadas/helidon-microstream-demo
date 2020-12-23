@@ -1,0 +1,5 @@
+com/oracle/graalvm/microstream/demo/EmployeResource.class
+com/oracle/graalvm/microstream/demo/dao/DataRoot.class
+com/oracle/graalvm/microstream/demo/dao/EmployeDaoService.class
+com/oracle/graalvm/microstream/demo/model/Employee.class
+com/oracle/graalvm/microstream/demo/dao/EmployeeDaoServiceImpl.class
