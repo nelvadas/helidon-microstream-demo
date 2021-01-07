@@ -1,6 +1,6 @@
-# Helidon Quickstart MP
+# Helidon Microstream Demo 
 
-Sample Helidon MP Microservices Demo with a Microsteram Persistence Layer.
+Sample Helidon  Microservices Demo with a Microsteram Persistence Layer.
 The microservice  includes multiple REST operations.
 
 ## Build and run
@@ -28,15 +28,28 @@ mvn clean  package -Pnative-image
 ## Exercise the application
 
 ```
-curl -X GET http://localhost:8080/greet
-{"message":"Hello World!"}
+Add Joe 
 
-curl -X GET http://localhost:8080/employe/Joe
-{"message":"Hello Joe!"}
+curl -X POST -H "Content-Type: application/json"  -d '{"firstname":"Joe","lastname":"Doe"}'  localhost:8080/employee
 
-curl -X POST -H "Content-Type: application/json"  -d '{"firstname":"GraalVM","lastname":"MicroStream"}'  localhost:8080/employe
+{"firstname":"Joe","lastname":"Doe","uid":"4ac482a8-20da-4290-9011-e8564dbc5d2c"}
+                                                                                                                     
 
-{"message":"Hola Jose!"}
+curl -X GET http://localhost:8080/employee
+
+[{"firstname":"Zoomba","lastname":"Zoom","uid":"2a1cdac2-8e18-40ba-88de-63799d798103"},
+{"firstname":"Zoomba","lastname":"Zoom","uid":"978b5730-7008-42f5-831d-f72baed14ad3"},
+{"firstname":"GraalVM","lastname":"MicroStream","uid":"c1aa8d8e-6ddd-4070-8598-ba7de55fefcd"},
+{"firstname":"Joe","lastname":"Doe","uid":"4ac482a8-20da-4290-9011-e8564dbc5d2c"}]
+
+Find Employee with name Joe
+curl -X GET http://localhost:8080/employee/Joe
+
+
+Delete Joe 
+curl -X DELETE  http://localhost:8080/employee/4ac482a8-20da-4290-9011-e8564dbc5d2c
+true
+
 ```
 
 ## Try health and metrics
