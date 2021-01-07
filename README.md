@@ -1,6 +1,7 @@
 # Helidon Quickstart MP
 
-Sample Helidon MP project that includes multiple REST operations.
+Sample Helidon MP Microservices Demo with a Microsteram Persistence Layer.
+The microservice  includes multiple REST operations.
 
 ## Build and run
 
@@ -10,18 +11,31 @@ mvn package
 java -jar target/helidon-microstream-demo.jar
 ```
 
+## Native image 
+
+### Generate the Reflexion config 
+```shell script
+$GRAALVM_HOME/bin/java -agentlib:native-image-agent=config-output-dir=./target/reflexion.generated  -jar  target/helidon-microstream-demo.jar
+```
+
+Copy the target/reflexion.generated/reflect-config.json content to META-INF/$GROUP_ID/$ARTIFACT_ID/
+
+
+### Build the native Microservice with GraalVM
+```
+mvn clean  package -Pnative-image
+```
 ## Exercise the application
 
 ```
 curl -X GET http://localhost:8080/greet
 {"message":"Hello World!"}
 
-curl -X GET http://localhost:8080/greet/Joe
+curl -X GET http://localhost:8080/employe/Joe
 {"message":"Hello Joe!"}
 
-curl -X PUT -H "Content-Type: application/json" -d '{"greeting" : "Hola"}' http://localhost:8080/greet/greeting
+curl -X POST -H "Content-Type: application/json"  -d '{"firstname":"GraalVM","lastname":"MicroStream"}'  localhost:8080/employe
 
-curl -X GET http://localhost:8080/greet/Jose
 {"message":"Hola Jose!"}
 ```
 
